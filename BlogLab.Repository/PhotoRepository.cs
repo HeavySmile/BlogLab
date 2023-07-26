@@ -78,9 +78,12 @@ namespace BlogLab.Repository
                 //ExecuteScalarAsync<int>
                 newPhoto = await GetAsync
                 (
-                    await connection.ExecuteAsync("Photo_Insert", 
-                    new { Photo = table.AsTableValuedParameter("dbo.PhotoType") }, 
-                    commandType: CommandType.StoredProcedure)
+                    await connection.ExecuteAsync
+                    (
+                        "Photo_Insert", 
+                        new { Photo = table.AsTableValuedParameter("dbo.PhotoType") }, 
+                        commandType: CommandType.StoredProcedure
+                    )
                 );
             }
 
