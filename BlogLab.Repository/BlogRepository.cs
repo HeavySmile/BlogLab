@@ -122,6 +122,7 @@ namespace BlogLab.Repository
                 );
             }
 
+            // simplify?
             newblogId = newblogId ?? blogCreate.BlogId;
             Blog blog = await GetAsync(newblogId.Value);
 
