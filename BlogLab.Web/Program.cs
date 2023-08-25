@@ -3,7 +3,9 @@ using BlogLab.Models.Account;
 using BlogLab.Models.Settings;
 using BlogLab.Repository;
 using BlogLab.Services;
+using BlogLab.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -66,11 +68,29 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
+
+app.ConfigureExceptionHandler();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyMethod());
+}
+else
+{
+    app.UseCors();
+}
+
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapRazorPages();
 
