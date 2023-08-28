@@ -89,9 +89,9 @@ namespace BlogLab.Web.Controllers
 
                     if (deleteResult.Error != null) return BadRequest(deleteResult.Error.Message);
 
-                    var affectRows = await _photoRepository.DeleteAsync(foundPhoto.PhotoId);
+                    var affectedRows = await _photoRepository.DeleteAsync(foundPhoto.PhotoId);
 
-                    return Ok(affectRows);
+                    return Ok(affectedRows);
                 }
                 
                 return BadRequest("Photo was not uploaded by the current user");
